@@ -16,4 +16,4 @@ jobs:
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker requests
-        python deploy.py
+        python src/deploy.py
