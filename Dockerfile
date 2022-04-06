@@ -1,6 +1,6 @@
 FROM python:3.8
 
-RUN pip3 install -r requrements.txt
+RUN pip3 install -r requirements.txt
 
 COPY src/training-script.py /usr/bin/train
 COPY src/serve-script.py /usr/bin/serve
