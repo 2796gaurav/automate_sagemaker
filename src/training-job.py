@@ -17,6 +17,7 @@ REGION = os.environ['AWS_DEFAULT_REGION']
 # Replace with your IAM role arn that has enough access (e.g. SageMakerFullAccess)
 IAM_ROLE_NAME = os.environ['IAM_ROLE_NAME']
 GITHUB_SHA = os.environ['GITHUB_SHA']
+REPO_NAME = os.environ['REPO_NAME']
 ACCOUNT_ID = session.boto_session.client(
     'sts').get_caller_identity()['Account']
 # Replace with your desired training instance

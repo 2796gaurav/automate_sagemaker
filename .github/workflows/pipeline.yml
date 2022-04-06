@@ -49,6 +49,7 @@ jobs:
         BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
         PREFIX: ${{ secrets.PREFIX }}
         IAM_ROLE_NAME: ${{ secrets.IAM_ROLE_NAME }}
+        REPO_NAME: ${{ secrets.REPO_NAME }}
         GITHUB_SHA: ${{ github.sha }}
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker requests fsspec s3fs tabulate
