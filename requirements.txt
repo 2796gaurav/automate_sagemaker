@@ -1,7 +1,2 @@
- scikit-learn
- pandas
- joblib
- flask
- requests
- boto3
- tabulate
+pandas==0.25.3
+scikit-learn==0.21.3
