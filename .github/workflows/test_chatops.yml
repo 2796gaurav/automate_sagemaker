@@ -1,5 +1,5 @@
 name: Demo
-on: [issue_comment]
+on: [pull_request_review_comment]
 
 jobs:
   label-pr:
@@ -63,9 +63,9 @@ jobs:
             USERNAME: ${{ steps.prcommg.outputs.COMMENTER_USERNAME }}
 
   notify-pr:
+      if: (github.event.issue.pull_request != null) &&  contains(github.event.comment.body, '/gaurav')
       name: notify Notification
       runs-on: ubuntu-latest
-      needs: [label-pr2]
       permissions:
         pull-requests: write
       steps:
@@ -73,5 +73,5 @@ jobs:
             uses: thollander/actions-comment-pull-request@v1
             with:
               message: 'Example of message !'
-              pr_number: ${{ needs.label-pr2.outputs.output1 }} # This will comment on pull request #123
+              #pr_number: ${{ needs.label-pr2.outputs.output1 }} # This will comment on pull request #123
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
