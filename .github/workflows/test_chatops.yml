@@ -1,5 +1,5 @@
 name: Demo
-on: [pull_request_review_comment]
+on: [issue_comment]
 
 jobs:
   label-pr:
@@ -69,6 +69,14 @@ jobs:
       permissions:
         pull-requests: write
       steps:
+          # Checkout source code
+          - name: Checkout
+            uses: actions/checkout@v2
+          - name: Checkout Pull Request
+            run: hub pr checkout ${{ github.event.issue.number }}
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              
           - name: Comment PR
             uses: thollander/actions-comment-pull-request@v1
             with:
