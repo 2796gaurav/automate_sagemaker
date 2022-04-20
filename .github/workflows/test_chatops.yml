@@ -1,5 +1,5 @@
 name: Demo
-on: [issue_comment]
+on: [pull_request_review_comment]
 
 jobs:
   label-pr:
@@ -55,15 +55,17 @@ jobs:
         - name: print variables
           if: steps.prcommg.outputs.BOOL_TRIGGERED == 'true'
           run: echo "${USERNAME} made a triggering comment on PR# ${PR_NUMBER} for ${BRANCH_NAME}"
+          outputs:
+            output1: ${PR_NUMBER}
           env: 
             BRANCH_NAME: ${{ steps.prcommg.outputs.BRANCH_NAME }}
             PR_NUMBER: ${{ steps.prcommg.outputs.PULL_REQUEST_NUMBER }}
             USERNAME: ${{ steps.prcommg.outputs.COMMENTER_USERNAME }}
 
   notify-pr:
+      if: (github.event.issue.pull_request != null) &&  contains(github.event.comment.body, '/gaurav')
       name: notify Notification
       runs-on: ubuntu-latest
-      needs: [label-pr2]
       permissions:
         pull-requests: write
       steps:
@@ -71,5 +73,5 @@ jobs:
             uses: thollander/actions-comment-pull-request@v1
             with:
               message: 'Example of message !'
-              pr_number: ${{ steps.prcommg.outputs.PULL_REQUEST_NUMBER }} # This will comment on pull request #123
+              #pr_number: ${{ needs.label-pr2.outputs.output1 }} # This will comment on pull request #123
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

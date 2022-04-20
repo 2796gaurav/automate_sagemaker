@@ -1,0 +1,4 @@
+autosagemaker:
+  preprocess:
+    ecr_repository: gaurav-processing-container
+    region: ap-south-1
